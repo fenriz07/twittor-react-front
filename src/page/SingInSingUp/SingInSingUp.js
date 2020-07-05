@@ -7,6 +7,7 @@ import {
   faComment,
 } from "@fortawesome/free-solid-svg-icons";
 import BasicModal from "../../components/Modal/BasicModal";
+import SingUpForm from "../../components/SingUpForm";
 import LogoWhiteTwittor from "../../assets/png/logo-white.png";
 import LogoTwittor from "../../assets/png/logo.png";
 
@@ -59,7 +60,7 @@ function LeftComponent() {
 }
 
 function RightComponent(props) {
-  const { openModal } = props;
+  const { openModal, setShowModal } = props;
 
   return (
     <Col className="singin-singup__right" xs={6}>
@@ -69,7 +70,7 @@ function RightComponent(props) {
         <h3>Unete a Twittor en este momento</h3>
         <Button
           variant="primary"
-          onClick={() => openModal(<h2>Formulario de registro</h2>)}
+          onClick={() => openModal(<SingUpForm setShowModal={setShowModal} />)}
         >
           Regístrate
         </Button>
