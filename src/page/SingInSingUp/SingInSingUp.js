@@ -8,14 +8,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import BasicModal from "../../components/Modal/BasicModal";
 import SingUpForm from "../../components/SingUpForm";
+import SingInForm from "../../components/SingInForm";
 import LogoWhiteTwittor from "../../assets/png/logo-white.png";
 import LogoTwittor from "../../assets/png/logo.png";
 
 import "./SingInSingUp.scss";
 
-export default function SingInSingUp() {
+export default function SingInSingUp(props) {
   const [showModal, setShowModal] = useState(false);
   const [contentModal, setContentModal] = useState(null);
+  const { setRefreshCheckLogin } = props;
 
   const openModal = (content) => {
     setShowModal(true);
@@ -27,7 +29,11 @@ export default function SingInSingUp() {
       <Container className="singin-singup" fluid>
         <Row>
           <LeftComponent />
-          <RightComponent openModal={openModal} setShowModal={setShowModal} />
+          <RightComponent
+            openModal={openModal}
+            setShowModal={setShowModal}
+            setRefreshCheckLogin={setRefreshCheckLogin}
+          />
         </Row>
       </Container>
       <BasicModal show={showModal} setShow={setShowModal}>
@@ -60,7 +66,7 @@ function LeftComponent() {
 }
 
 function RightComponent(props) {
-  const { openModal, setShowModal } = props;
+  const { openModal, setShowModal, setRefreshCheckLogin } = props;
 
   return (
     <Col className="singin-singup__right" xs={6}>
@@ -76,7 +82,14 @@ function RightComponent(props) {
         </Button>
         <Button
           variant="outline-primary"
-          onClick={() => openModal(<h2>Formulario iniciar sesión</h2>)}
+          onClick={() =>
+            openModal(
+              <SingInForm
+                setShowModal={setShowModal}
+                setRefreshCheckLogin={setRefreshCheckLogin}
+              />
+            )
+          }
         >
           Iniciar sesión
         </Button>

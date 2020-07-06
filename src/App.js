@@ -1,18 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SingInSingUp from "./page/SingInSingUp";
 import { ToastContainer } from "react-toastify";
+import { AuthContext } from "./utils/context";
+import { isUserLogedApi } from "./api/auth";
 
 export default function App() {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(null);
+  const [loadUser, setLoadUser] = useState(false);
+  const [refreshCheckLogin, setRefreshCheckLogin] = useState(false);
+
+  useEffect(() => {
+    setUser(isUserLogedApi());
+    setRefreshCheckLogin(false);
+    setLoadUser(true);
+  }, [refreshCheckLogin]);
+
+  if (!loadUser) return null;
 
   return (
-    <div>
-      {user ? (
+    <AuthContext.Provider value={user}>
+      {!user ? (
         <div>
-          <SingInSingUp />
+          <SingInSingUp setRefreshCheckLogin={setRefreshCheckLogin} />
         </div>
       ) : (
-        "No estas logeado"
+        "Estas logeado"
       )}
       <ToastContainer
         position="top-right"
@@ -24,6 +36,6 @@ export default function App() {
         draggable
         pauseOnHover
       />
-    </div>
+    </AuthContext.Provider>
   );
 }
