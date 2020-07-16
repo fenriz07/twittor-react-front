@@ -25,7 +25,7 @@ export default function App() {
           <SingInSingUp setRefreshCheckLogin={setRefreshCheckLogin} />
         </div>
       ) : (
-        <Routing />
+        <Routing setRefreshCheckLogin={setRefreshCheckLogin} />
       )}
       <ToastContainer
         position="top-right"
