@@ -3,6 +3,7 @@ import SingInSingUp from "./page/SingInSingUp";
 import { ToastContainer } from "react-toastify";
 import { AuthContext } from "./utils/context";
 import { isUserLogedApi } from "./api/auth";
+import Routing from "./routes/Routing";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -24,7 +25,7 @@ export default function App() {
           <SingInSingUp setRefreshCheckLogin={setRefreshCheckLogin} />
         </div>
       ) : (
-        "Estas logeado"
+        <Routing />
       )}
       <ToastContainer
         position="top-right"

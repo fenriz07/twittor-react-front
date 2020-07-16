@@ -27,7 +27,7 @@ export default function SingUpForm(props) {
     } else {
       if (!isEmailValid(formData.email)) {
         toast.warning("Email invalido");
-      } else if (formData.password != formData.repeatPassword) {
+      } else if (formData.password !== formData.repeatPassword) {
         toast.warning("Las contraseñas deben ser iguales");
       } else if (size(formData.password) < 6) {
         toast.warning("La contraseña debe ser mayor que 6");
